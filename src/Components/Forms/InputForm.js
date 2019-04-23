@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeForm = props => {
+const InputForm = props => {
   let inputElement = <input {...props} />;
 
   return (
@@ -11,4 +11,4 @@ const EmployeeForm = props => {
   );
 };
 
-export default EmployeeForm;
+export default InputForm;

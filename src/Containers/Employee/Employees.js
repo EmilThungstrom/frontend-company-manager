@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import EmployeeForm from "../../Components/Employee/Form/EmployeeForm";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import EmployeeList from "../../Components/Employee/UI/EmployeeList";
+import InputForm from "../../Components/Forms/InputForm";
 
 class Employees extends Component {
   state = {
@@ -62,19 +62,19 @@ class Employees extends Component {
     return (
       <div>
         <div className="m-5">
-          <EmployeeForm label="First name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 0)} />
-          <EmployeeForm label="Last name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 1)} />
-          <EmployeeForm label="Address" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 2)} />
-          <EmployeeForm label="Email" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 3)} />
-          <EmployeeForm label="Team" className="form-control w-25" type="number" onChange={event => this.formHandler(event, 4)} />
-          <button
+          <InputForm label="First name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 0)} />
+          <InputForm label="Last name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 1)} />
+          <InputForm label="Address" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 2)} />
+          <InputForm label="Email" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 3)} />
+          <InputForm label="Team" className="form-control w-25" type="number" onChange={event => this.formHandler(event, 4)} />
+          <Button
             className="btn btn-primary mt-2"
             onClick={() => {
               this.searchHandler();
             }}
           >
             Search
-          </button>
+          </Button>
         </div>
         <div>
           <EmployeeList employees={this.state.employees} />

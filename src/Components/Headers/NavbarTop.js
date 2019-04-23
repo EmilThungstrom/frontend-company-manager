@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 export class NavbarTop extends Component {
@@ -8,9 +8,14 @@ export class NavbarTop extends Component {
       <Navbar sticky="top" bg="dark" variant="dark">
         <Navbar.Brand className="mx-5">Company Manager</Navbar.Brand>
         <Nav className="mr-auto">
-          <LinkContainer to="/department">
-            <Nav.Link>Department</Nav.Link>
-          </LinkContainer>
+          <NavDropdown title="Department" id="basic-nav-dropdown">
+            <LinkContainer to="/departments">
+              <NavDropdown.Item>List</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/createDepartment">
+              <NavDropdown.Item>Create</NavDropdown.Item>
+            </LinkContainer>
+          </NavDropdown>
           <LinkContainer to="/employee">
             <Nav.Link>Employee</Nav.Link>
           </LinkContainer>

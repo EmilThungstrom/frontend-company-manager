@@ -16,31 +16,27 @@ class Employees extends Component {
       departmentId: null,
       teamId: null
     },
-    employees: []
+    employees: [],
+    departments: []
   };
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/api/department/list")
+      .then(res => {
+        console.log(res.data);
+        this.setState({ departments: res.data });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 
   formHandler = (event, inputIdentifier) => {
     const updatedFormState = {
       ...this.state.formState
     };
-
-    switch (inputIdentifier) {
-      case 0:
-        updatedFormState.firstName = event.target.value;
-        break;
-      case 1:
-        updatedFormState.lastName = event.target.value;
-        break;
-      case 2:
-        updatedFormState.address = event.target.value;
-        break;
-      case 3:
-        updatedFormState.email = event.target.value;
-        break;
-      case 4:
-        updatedFormState.teamId = event.target.value;
-        break;
-    }
+    updatedFormState[inputIdentifier] = event.target.value;
     this.setState({ formState: updatedFormState });
   };
 
@@ -62,11 +58,11 @@ class Employees extends Component {
     return (
       <div>
         <div className="m-5">
-          <InputForm label="First name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 0)} />
-          <InputForm label="Last name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 1)} />
-          <InputForm label="Address" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 2)} />
-          <InputForm label="Email" className="form-control w-25" type="text" onChange={event => this.formHandler(event, 3)} />
-          <InputForm label="Team" className="form-control w-25" type="number" onChange={event => this.formHandler(event, 4)} />
+          <InputForm label="First name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "firstName")} />
+          <InputForm label="Last name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "lastName")} />
+          <InputForm label="Address" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "address")} />
+          <InputForm label="Email" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "email")} />
+          <InputForm label="Team" className="form-control w-25" type="number" onChange={event => this.formHandler(event, "teamId")} />
           <Button
             className="btn btn-primary mt-2"
             onClick={() => {

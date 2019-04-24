@@ -16,9 +16,14 @@ export class NavbarTop extends Component {
               <NavDropdown.Item>Create</NavDropdown.Item>
             </LinkContainer>
           </NavDropdown>
-          <LinkContainer to="/employee">
-            <Nav.Link>Employee</Nav.Link>
-          </LinkContainer>
+          <NavDropdown title="Employee" id="basic-nav-dropdown">
+            <LinkContainer to="/employeeSearch">
+              <NavDropdown.Item>Search</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/employeeCreate">
+              <NavDropdown.Item>Create</NavDropdown.Item>
+            </LinkContainer>
+          </NavDropdown>
           <LinkContainer to="/team">
             <Nav.Link>Team</Nav.Link>
           </LinkContainer>

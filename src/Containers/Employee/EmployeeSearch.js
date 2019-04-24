@@ -5,7 +5,7 @@ import EmployeeList from "../../Components/Employee/UI/EmployeeList";
 import InputForm from "../../Components/Forms/InputForm";
 import SelectForm from "../../Components/Forms/SelectForm";
 
-class Employees extends Component {
+class EmployeeSearch extends Component {
   state = {
     formState: {
       firstName: "",
@@ -105,4 +105,4 @@ class Employees extends Component {
   }
 }
 
-export default Employees;
+export default EmployeeSearch;

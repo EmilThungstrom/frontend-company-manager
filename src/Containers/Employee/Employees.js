@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import EmployeeList from "../../Components/Employee/UI/EmployeeList";
 import InputForm from "../../Components/Forms/InputForm";
+import SelectForm from "../../Components/Forms/SelectForm";
 
 class Employees extends Component {
   state = {
@@ -36,8 +37,13 @@ class Employees extends Component {
     const updatedFormState = {
       ...this.state.formState
     };
-    updatedFormState[inputIdentifier] = event.target.value;
+    if (inputIdentifier === "department") {
+      updatedFormState["departmentId"] = this.state.departments[event.target.value];
+    } else {
+      updatedFormState[inputIdentifier] = event.target.value;
+    }
     this.setState({ formState: updatedFormState });
+    console.log(this.state.formState);
   };
 
   searchHandler() {
@@ -58,13 +64,32 @@ class Employees extends Component {
     return (
       <div>
         <div className="m-5">
-          <InputForm label="First name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "firstName")} />
-          <InputForm label="Last name" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "lastName")} />
-          <InputForm label="Address" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "address")} />
-          <InputForm label="Email" className="form-control w-25" type="text" onChange={event => this.formHandler(event, "email")} />
-          <InputForm label="Team" className="form-control w-25" type="number" onChange={event => this.formHandler(event, "teamId")} />
+          <Form.Row>
+            <Col>
+              <Form.Group controlId="formFirstName">
+                <InputForm label="First name" type="text" onChange={event => this.formHandler(event, "firstName")} />
+              </Form.Group>
+              <Form.Group controlId="formLastName">
+                <InputForm label="Last name" type="text" onChange={event => this.formHandler(event, "lastName")} />
+              </Form.Group>
+              <Form.Group controlId="formAddress">
+                <InputForm label="Address" type="text" onChange={event => this.formHandler(event, "address")} />
+              </Form.Group>
+              <Form.Group controlId="formEmail">
+                <InputForm label="Email" type="text" onChange={event => this.formHandler(event, "email")} />
+              </Form.Group>
+              <Form.Group controlId="formTeam">
+                <InputForm label="Team" type="number" onChange={event => this.formHandler(event, "teamId")} />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formDepartment">
+                <SelectForm label="Department" options={this.state.departments} onChange={event => this.formHandler(event, "department")} />
+              </Form.Group>
+            </Col>
+          </Form.Row>
           <Button
-            className="btn btn-primary mt-2"
+            className="mt-2"
             onClick={() => {
               this.searchHandler();
             }}

@@ -1,13 +1,14 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 const InputForm = props => {
-  let inputElement = <input {...props} />;
+  let inputElement = <Form.Control {...props} />;
 
   return (
-    <div>
-      <label>{props.label}</label>
+    <React.Fragment>
+      <Form.Label>{props.label}</Form.Label>
       {inputElement}
-    </div>
+    </React.Fragment>
   );
 };
 

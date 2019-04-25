@@ -4,8 +4,14 @@ import { Form } from "react-bootstrap";
 const SelectForm = props => {
   const options = [];
 
-  for (let value in props.options) {
-    options.push(<option key={value}>{value}</option>);
+  if (props.options != null) {
+    props.options.forEach(option => {
+      options.push(
+        <option key={option} value={option}>
+          {option}
+        </option>
+      );
+    });
   }
 
   return (

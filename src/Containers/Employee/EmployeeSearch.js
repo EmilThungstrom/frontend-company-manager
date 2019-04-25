@@ -25,8 +25,11 @@ class EmployeeSearch extends Component {
     axios
       .get("http://localhost:8080/api/department/list")
       .then(res => {
-        console.log(res.data);
-        this.setState({ departments: res.data });
+        let departments = {
+          None: null,
+          ...res.data
+        };
+        this.setState({ departments: departments });
       })
       .catch(err => {
         console.error(err);
@@ -43,7 +46,6 @@ class EmployeeSearch extends Component {
       updatedFormState[inputIdentifier] = event.target.value;
     }
     this.setState({ formState: updatedFormState });
-    console.log(this.state.formState);
   };
 
   searchHandler() {
@@ -53,7 +55,6 @@ class EmployeeSearch extends Component {
         if (res.status === 200) {
           this.setState({ employees: res.data });
         }
-        console.log(res);
       })
       .catch(err => {
         console.error(err);
@@ -84,7 +85,7 @@ class EmployeeSearch extends Component {
             </Col>
             <Col>
               <Form.Group controlId="formDepartment">
-                <SelectForm label="Department" options={this.state.departments} onChange={event => this.formHandler(event, "department")} />
+                <SelectForm label="Department" options={Object.keys(this.state.departments)} onChange={event => this.formHandler(event, "department")} />
               </Form.Group>
             </Col>
           </Form.Row>

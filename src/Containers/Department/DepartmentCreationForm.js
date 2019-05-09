@@ -31,7 +31,7 @@ export class DepartmentCreationForm extends Component {
       return;
     }
     axios
-      .post("http://localhost:8080/api/department/create", this.state)
+      .post("http://localhost:8080/api/department/create", this.state, { withCredentials: true })
       .then(res => {
         this.setState({ success: true });
         console.log(res);

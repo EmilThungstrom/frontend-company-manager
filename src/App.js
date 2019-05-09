@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavbarTop from "./Components/Headers/NavbarTop";
 import Departments from "./Containers/Department/Departments";
 import EmployeeSearch from "./Containers/Employee/EmployeeSearch";
@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavbarTop />
+          <NavbarTop authenticated={this.props.authenticated} />
           <Route path="/departments" component={Departments} />
           <Route path="/createDepartment" component={DepartmentCreationForm} />
           <Route path="/employeeSearch" component={EmployeeSearch} />
@@ -37,8 +37,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    authenticated: state.authenticated,
-    cookie: state.cookie
+    authenticated: state.authenticated
   };
 };
 

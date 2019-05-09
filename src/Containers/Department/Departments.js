@@ -9,7 +9,7 @@ export class Departments extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/api/department")
+      .get("http://localhost:8080/api/department", { withCredentials: true })
       .then(res => {
         this.setState({ departments: res.data });
       })

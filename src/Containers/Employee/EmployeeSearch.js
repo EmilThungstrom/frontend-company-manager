@@ -23,7 +23,7 @@ class EmployeeSearch extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/api/department/list")
+      .get("http://localhost:8080/api/department/list", { withCredentials: true })
       .then(res => {
         let departments = {
           None: null,

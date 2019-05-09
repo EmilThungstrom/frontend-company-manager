@@ -1,14 +1,16 @@
 const initialState = {
-  authenticated: false,
-  cookie: ""
+  authenticated: false
 };
 
 const reducer = (state = initialState, action) => {
-  if (action.type === "SET_COOKIE") {
-    console.log(action.value);
+  if (action.type === "SET_AUTH_TRUE") {
     return {
-      authenticated: true,
-      cookie: action.value
+      authenticated: true
+    };
+  }
+  if (action.type === "SET_AUTH_FALSE") {
+    return {
+      authenticated: false
     };
   }
   return state;

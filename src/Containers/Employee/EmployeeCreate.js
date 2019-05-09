@@ -64,7 +64,7 @@ class EmployeeCreate extends Component {
 
   createPostHandler() {
     axios
-      .post("http://localhost:8080/api/employee/create", this.state.formState)
+      .post("http://localhost:8080/api/employee/create", this.state.formState, { withCredentials: true })
       .then(res => {
         console.log(res);
       })

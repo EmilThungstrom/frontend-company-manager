@@ -11,25 +11,17 @@ export class LoginPage extends Component {
 
   authDataHandler = () => {
     const params = new URLSearchParams();
-    params.append("username", "user");
-    params.append("password", "userPass");
+    params.append("username", this.state.email);
+    params.append("password", this.state.password);
 
     axios.defaults.withCredentials = true;
     axios
       .post("http://localhost:8080/login", params, { withCredentials: true })
       .then(res => {
+        if (res.status === 200) {
+          this.props.onLoginSuccess();
+        }
         console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
-
-  getDataHandler = () => {
-    axios
-      .get("http://localhost:8080/api/department", { withCredentials: true })
-      .then(res => {
-        console.log(res.data);
       })
       .catch(err => {
         console.error(err);
@@ -51,9 +43,6 @@ export class LoginPage extends Component {
         <Button variant="primary" onClick={this.authDataHandler}>
           Submit
         </Button>
-        <Button variant="primary" onClick={this.getDataHandler}>
-          get
-        </Button>
       </Form>
     );
   }
@@ -61,7 +50,7 @@ export class LoginPage extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCookieReturn: () => dispatch({ type: "SET_COOKIE", value: "test" })
+    onLoginSuccess: () => dispatch({ type: "SET_AUTH_TRUE" })
   };
 };
 

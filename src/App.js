@@ -5,11 +5,22 @@ import Departments from "./Containers/Department/Departments";
 import EmployeeSearch from "./Containers/Employee/EmployeeSearch";
 import DepartmentCreationForm from "./Containers/Department/DepartmentCreationForm";
 import EmployeeCreate from "./Containers/Employee/EmployeeCreate";
+import { connect } from "react-redux";
+import LoginPage from "./Containers/Login/LoginPage";
 
 import "bootstrap/dist/css/bootstrap.css";
 
 class App extends Component {
   render() {
+    if (!this.props.authenticated) {
+      return (
+        <Router>
+          <NavbarTop />
+          <LoginPage />
+        </Router>
+      );
+    }
+
     return (
       <Router>
         <div className="App">
@@ -24,4 +35,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    authenticated: state.authenticated,
+    cookie: state.cookie
+  };
+};
+
+export default connect(mapStateToProps)(App);
